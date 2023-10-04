@@ -58,8 +58,8 @@ def scan_default_folders(scan_folders, file_type_index: int = 1):
         excel_path = os.path.join(two_parent_folders_up, 'excel')
 
         # Create directories if they do not exist
-        create_dir(videos_path)
-        create_dir(excel_path)
+        os.makedirs(videos_path, exist_ok=True)
+        os.makedirs(excel_path, exist_ok=True)
 
         # Detect video files
         video_folder_path: str = ""
