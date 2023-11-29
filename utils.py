@@ -3,17 +3,14 @@
 # Extra packages
 import cv2
 import numpy as np
-import imageio
 
 #Default part of python
 import os
-import tkinter as tk
-from tkinter import messagebox
-from tkinter import filedialog
 import logging
 
 
 def ask_yes_no(text):
+    from tkinter import messagebox
     global logger
     logger.debug(f'Running function ask_yes_no({text})')
     result: bool = messagebox.askyesno("Confirmation", text)
@@ -37,6 +34,8 @@ def scan_default_folders(scan_folders, file_type_index: int = 1):
         logger.debug(f'Running function select_file({selected_file_index}, {index}, {window})')
         selected_file_index.set(index + 1)
         window.destroy()
+
+    import tkinter as tk
 
     global logger
     logger.debug('Running function scan_default_folders()')
@@ -144,6 +143,7 @@ def check_path(path, path_type: int = 0):
     return path_ok
 
 def get_video_folder(video_folder_path, check):
+    from tkinter import filedialog
 
     # Define logger
     global logger
@@ -190,6 +190,8 @@ def get_video_folder(video_folder_path, check):
     return video_folder_path, scanned_folders, tree_allow
 
 def get_excel_path(annotation_file_path, check, ini_dir, excel_type):
+    from tkinter import messagebox
+    from tkinter import filedialog
     global logger
     logger.debug(f'Running function get_excel_path({check}, {ini_dir})')
     # Set path to Excel file manually
@@ -243,6 +245,9 @@ def delete_image_and_related_txt(image_path, delete_txt: bool = True):
 
 def delete_corrupted_videos(folder_path):
 # TODO: Move this function to a separate script as part of the "video" submodule. Therefore utils will not be dependent on "imageio" and video relevant code will be in the correct module.
+
+    import imageio
+
     for root, _, files in os.walk(folder_path):
         for file in files:
             if file.lower().endswith(('.mp4')):
